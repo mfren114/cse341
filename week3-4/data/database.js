@@ -1,5 +1,5 @@
 const dotenv = require('dotenv');
-dotenv.config();
+dotenv.config({path: 'C:/Users/mfrenette/OneDrive - Tesla/Desktop/cse341/cse341/week3-4/.env'});
 
 const MongoClient = require('mongodb').MongoClient;
 
