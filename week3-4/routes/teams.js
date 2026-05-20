@@ -3,13 +3,15 @@ const router = express.Router();
 
 const teamsController = require('../controllers/teams');
 
+const validation = require('../middleware/validate')
+
 router.get('/', teamsController.getAll);
 
 router.get('/:id', teamsController.getSingle);
 
-router.post('/', teamsController.createTeams);
+router.post('/', validation.saveTeam, teamsController.createTeams);
 
-router.put('/:id', teamsController.updateTeams);
+router.put('/:id', validation.saveTeam, teamsController.updateTeams);
 
 router.delete('/:id', teamsController.deleteTeams);
 

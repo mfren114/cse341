@@ -3,13 +3,15 @@ const router = express.Router();
 
 const playersController = require('../controllers/players');
 
+const validation = require('../middleware/validate')
+
 router.get('/', playersController.getAll);
 
 router.get('/:id', playersController.getSingle);
 
-router.post('/', playersController.createPlayers);
+router.post('/', validation.savePlayer, playersController.createPlayers);
 
-router.put('/:id', playersController.updatePlayers);
+router.put('/:id', validation.savePlayer, playersController.updatePlayers);
 
 router.delete('/:id', playersController.deletePlayers);
 
