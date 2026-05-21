@@ -7,10 +7,10 @@ const savePlayer = (req, res, next) => {
         firstName: 'required|string',
         lastName: 'required|string',
         team: 'required|string',
-        number: 'required|int',
-        height: 'required|int',
-        weight: 'required|int',
-        vertical: 'required|int' 
+        number: 'required|integer',
+        height: 'required|integer',
+        weight: 'required|integer',
+        vertical: 'required|integer' 
     };
     validator(req.body, validationRule, {}, (err,status) => {
         if (!status) {
