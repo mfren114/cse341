@@ -5,10 +5,11 @@
     "description": "User Api",
     "version": "1.0.0"
   },
-  "host": "cse341-week3-4-msde.onrender.com",
+  "host": "localhost:3001",
   "basePath": "/",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/": {
@@ -24,10 +25,20 @@
         }
       }
     },
+    "/api-docs": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/players/": {
       "get": {
         "tags": [
-          "players"
+          "teams"
         ],
         "description": "",
         "produces": [
@@ -36,6 +47,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -66,6 +80,9 @@
                 "height": {
                   "example": "any"
                 },
+                "weight": {
+                  "example": "any"
+                },
                 "vertical": {
                   "example": "any"
                 }
@@ -76,6 +93,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -103,6 +123,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -139,6 +162,9 @@
                 "height": {
                   "example": "any"
                 },
+                "weight": {
+                  "example": "any"
+                },
                 "vertical": {
                   "example": "any"
                 }
@@ -149,6 +175,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
@@ -190,6 +219,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -219,6 +251,9 @@
           "204": {
             "description": "No Content"
           },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -228,7 +263,7 @@
     "/teams/{id}": {
       "get": {
         "tags": [
-          "teams"
+          "players"
         ],
         "description": "",
         "produces": [
@@ -245,6 +280,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -266,22 +304,10 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstName": {
+                "name": {
                   "example": "any"
                 },
-                "lastName": {
-                  "example": "any"
-                },
-                "team": {
-                  "example": "any"
-                },
-                "number": {
-                  "example": "any"
-                },
-                "height": {
-                  "example": "any"
-                },
-                "vertical": {
+                "city": {
                   "example": "any"
                 }
               }
@@ -291,6 +317,9 @@
         "responses": {
           "204": {
             "description": "No Content"
+          },
+          "412": {
+            "description": "Precondition Failed"
           },
           "500": {
             "description": "Internal Server Error"
