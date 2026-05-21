@@ -14,7 +14,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
-    //#swagger.tags=['players']
+    //#swagger.tags=['teams']
     try {
         const userId = new ObjectId(req.params.id);
         const result = await mongodb.getDatabase().db().collection('teams').find({_id: userId}).toArray();

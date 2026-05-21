@@ -38,7 +38,7 @@
     "/players/": {
       "get": {
         "tags": [
-          "teams"
+          "players"
         ],
         "description": "",
         "produces": [
@@ -263,7 +263,7 @@
     "/teams/{id}": {
       "get": {
         "tags": [
-          "players"
+          "teams"
         ],
         "description": "",
         "produces": [

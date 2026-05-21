@@ -2,7 +2,7 @@ const mongodb = require('../data/database');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
-    //#swagger.tags=['teams']
+    //#swagger.tags=['players']
     try{
         const result = await mongodb.getDatabase().db().collection('players').find().toArray();
     
