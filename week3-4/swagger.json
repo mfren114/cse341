@@ -5,10 +5,11 @@
     "description": "User Api",
     "version": "1.0.0"
   },
-  "host": "cse341-week3-4-msde.onrender.com",
+  "host": "localhost:3001",
   "basePath": "/",
   "schemes": [
-    "https"
+    "https",
+    "http"
   ],
   "paths": {
     "/": {
