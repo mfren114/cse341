@@ -38,11 +38,16 @@ const createPlayers = async (req, res) => {
         weight: req.body.weight,
         vertical: req.body.vertical
     };
-    const response = await mongodb.getDatabase().db().collection('players').insertOne(players);
-    if (response.acknowledged) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured white updating the player')
+    try {
+        const response = await mongodb.getDatabase().db().collection('players').insertOne(players);
+        if (response.acknowledged) {
+            res.status(204).send();
+        } else {
+            res.status(500).json(response.error || 'Some error occured while updating the player');
+        }
+    } catch (error) {
+        console.error('Database Error', error);
+        res.status(500).json(error.message || 'Some error occured while updating the player');
     }
 };
 
