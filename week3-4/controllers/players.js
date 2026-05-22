@@ -43,11 +43,11 @@ const createPlayers = async (req, res) => {
         if (response.acknowledged) {
             res.status(204).send();
         } else {
-            res.status(500).json(response.error || 'Some error occured while updating the player');
+            res.status(500).json(response.error || 'Some error occured while creating the player');
         }
     } catch (error) {
         console.error('Database Error', error);
-        res.status(500).json(error.message || 'Some error occured while updating the player');
+        res.status(500).json(error.message || 'Some error occured while creating the player');
     }
 };
 
@@ -63,22 +63,32 @@ const updatePlayers = async (req, res) => {
         weight: req.body.weight,
         vertical: req.body.vertical
     };
-    const response = await mongodb.getDatabase().db().collection('players').replaceOne({_id: userId}, players);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured while updating the player')
+    try {
+        const response = await mongodb.getDatabase().db().collection('players').replaceOne({_id: userId}, players);
+        if (response.modifiedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(500).json(response.error || 'Some error occured while updating the player')
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        res.status(500).json(error.message || 'Some error occurred while updating the player');
     }
 };
 
 const deletePlayers = async (req, res) => {
     //#swagger.tags=['players']
-    const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('players').deleteOne({_id: userId});
-    if (response.deletedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured while deleting the player')
+    try {
+        const userId = new ObjectId(req.params.id);
+        const response = await mongodb.getDatabase().db().collection('players').deleteOne({_id: userId});
+        if (response.deletedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(500).json(response.error || 'Some error occured while deleting the player')
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        res.status(500).json(error.message || 'Some error occurred while deleting the player');
     }
 }
 

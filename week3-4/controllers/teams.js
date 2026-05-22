@@ -32,12 +32,17 @@ const createTeams = async (req, res) => {
         name: req.body.name,
         city: req.body.city
     };
-    const response = await mongodb.getDatabase().db().collection('teams').insertOne(teams);
-    if (response.acknowledged) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured white updating the team')
-    }
+    try {
+        const response = await mongodb.getDatabase().db().collection('teams').insertOne(teams);
+        if (response.acknowledged) {
+            res.status(204).send();
+         } else {
+            res.status(500).json(response.error || 'Some error occured white creating the team')
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        res.status(500).json(error.message || 'Some error occurred while creating the team');
+    }   
 };
 
 const updateTeams = async (req, res) => {
@@ -47,22 +52,32 @@ const updateTeams = async (req, res) => {
         name: req.body.name,
         city: req.body.city
     };
-    const response = await mongodb.getDatabase().db().collection('teams').replaceOne({_id: userId}, teams);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured while updating the team')
+    try {
+        const response = await mongodb.getDatabase().db().collection('teams').replaceOne({_id: userId}, teams);
+        if (response.modifiedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(500).json(response.error || 'Some error occured while updating the team')
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        res.status(500).json(error.message || 'Some error occurred while updating the team');
     }
 };
 
 const deleteTeams = async (req, res) => {
     //#swagger.tags=['teams']
-    const userId = new ObjectId(req.params.id);
-    const response = await mongodb.getDatabase().db().collection('teams').deleteOne({_id: userId});
-    if (response.deletedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occured while deleting the team')
+    try {
+        const userId = new ObjectId(req.params.id);
+        const response = await mongodb.getDatabase().db().collection('teams').deleteOne({_id: userId});
+        if (response.deletedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(500).json(response.error || 'Some error occured while deleting the team')
+        }
+    } catch (error) {
+        console.error('Database Error:', error);
+        res.status(500).json(error.message || 'Some error occurred while deleting the team');
     }
 }
 
