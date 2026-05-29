@@ -3,17 +3,19 @@ const router = express.Router();
 
 const playersController = require('../controllers/players');
 
-const validation = require('../middleware/validate')
+const validation = require('../middleware/validate');
+
+const { isAuthenticated } = require('../middleware/authenticate');
 
 router.get('/', playersController.getAll);
 
 router.get('/:id', playersController.getSingle);
 
-router.post('/', validation.savePlayer, playersController.createPlayers);
+router.post('/', isAuthenticated, validation.savePlayer, playersController.createPlayers);
 
-router.put('/:id', validation.savePlayer, playersController.updatePlayers);
+router.put('/:id', isAuthenticated, validation.savePlayer, playersController.updatePlayers);
 
-router.delete('/:id', playersController.deletePlayers);
+router.delete('/:id', isAuthenticated, playersController.deletePlayers);
 
 
 module.exports = router;
