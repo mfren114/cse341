@@ -8,8 +8,8 @@ const GitHubStrategy = require('passport-github2').Strategy;
 const cors = require('cors');
 require('dotenv').config({path: './.env'});
 //const dotenv = require('dotenv').config({path: './.env'});
-//const https = require('https');
-//https.globalAgent.options.rejectUnauthorized = false;
+const https = require('https');
+https.globalAgent.options.rejectUnauthorized = false;
 
 
 const port = process.env.PORT || 3001;
